@@ -1,43 +1,42 @@
-;;;; Simple tokens ;;;;
+; Simple tokens ;;;;
 (terminal) @string.grammar
 
 (special_sequence) @string.special.grammar
 
 (integer) @number
 
-(comment) @comment
+(comment) @comment @spell
 
-;;;; Identifiers ;;;;
-
+; Identifiers ;;;;
 ; Allow different highlighting for specific casings
 ((identifier) @type
- (#lua-match? @type "^%u"))
+  (#lua-match? @type "^%u"))
 
-((identifier) @symbol
- (#lua-match? @symbol "^%l"))
+((identifier) @string.special.symbol
+  (#lua-match? @string.special.symbol "^%l"))
 
 ((identifier) @constant
- (#lua-match? @constant "^%u[%u%d_]+$"))
+  (#lua-match? @constant "^%u[%u%d_]+$"))
 
-;;; Punctuation ;;;;
+; Punctuation ;;;;
 [
- ";"
- ","
+  ";"
+  ","
 ] @punctuation.delimiter
 
 [
- "|"
- "*"
- "-"
+  "|"
+  "*"
+  "-"
 ] @operator
 
 "=" @keyword.operator
 
 [
- "("
- ")"
- "["
- "]"
- "{"
- "}"
+  "("
+  ")"
+  "["
+  "]"
+  "{"
+  "}"
 ] @punctuation.bracket

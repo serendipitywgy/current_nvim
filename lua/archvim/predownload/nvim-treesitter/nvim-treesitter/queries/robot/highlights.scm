@@ -1,21 +1,79 @@
-(argument (dictionary_variable) @string.special)
-(argument (list_variable) @string.special)
-(argument (scalar_variable) @string.special)
-(argument (text_chunk) @string)
+[
+  (comment)
+  (extra_text)
+] @comment @spell
 
-(keyword_invocation (keyword) @function)
+[
+  (section_header)
+  (setting_statement)
+  (keyword_setting)
+  (test_case_setting)
+] @keyword
 
-(test_case_definition (name) @property)
+(variable_definition
+  (variable_name) @variable)
 
-(keyword_definition (body (keyword_setting) @keyword))
-(keyword_definition (name) @function)
+(keyword_definition
+  (name) @function)
 
-(variable_definition (variable_name) @variable)
+(test_case_definition
+  (name) @function)
 
-(setting_statement) @keyword
-
-(extra_text) @comment
-(section_header) @keyword
+(keyword_invocation
+  (keyword) @function.call)
 
 (ellipses) @punctuation.delimiter
-(comment) @comment
+
+(text_chunk) @string
+
+(inline_python_expression) @string.special
+
+[
+  (scalar_variable)
+  (list_variable)
+  (dictionary_variable)
+] @variable
+
+; Control structures
+[
+  "FOR"
+  "IN"
+  "IN RANGE"
+  "IN ENUMERATE"
+  "IN ZIP"
+  (break_statement)
+  (continue_statement)
+] @keyword.repeat
+
+(for_statement
+  "END" @keyword.repeat)
+
+"WHILE" @keyword.repeat
+
+(while_statement
+  "END" @keyword.repeat)
+
+[
+  "IF"
+  "ELSE IF"
+] @keyword.conditional
+
+(if_statement
+  "END" @keyword.conditional)
+
+(if_statement
+  (else_statement
+    "ELSE" @keyword.conditional))
+
+[
+  "TRY"
+  "EXCEPT"
+  "FINALLY"
+] @keyword.exception
+
+(try_statement
+  "END" @keyword.exception)
+
+(try_statement
+  (else_statement
+    "ELSE" @keyword.exception))

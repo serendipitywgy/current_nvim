@@ -1,4 +1,4 @@
-(comment) @comment
+(comment) @comment @spell
 
 (definition) @keyword
 
@@ -16,15 +16,11 @@
 [
   "*"
   "?"
-] @repeat
+] @keyword.repeat
 
-[
-  ":"
-] @punctuation.delimiter
+":" @punctuation.delimiter
 
 [
   "("
   ")"
 ] @punctuation.bracket
-
-(ERROR) @error

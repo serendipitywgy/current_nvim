@@ -1,4 +1,7 @@
-["BEGIN" "END"] @keyword
+[
+  "BEGIN"
+  "END"
+] @keyword
 
 (dashes) @punctuation.delimiter
 
@@ -6,6 +9,4 @@
 
 (data) @none
 
-(comment) @comment
-
-(ERROR) @error
+(comment) @comment @spell

@@ -23,6 +23,7 @@
   (arith_cmp_predicate)
 ] @keyword
 
+; format-ignore
 [
   "module"
   "unrealized_conversion_cast"
@@ -84,8 +85,8 @@
   "arith.addui_extended"
   "arith.addf"
   "arith.divf"
-  "arith.maxf"
-  "arith.minf"
+  "arith.maximumf"
+  "arith.minimumf"
   "arith.mulf"
   "arith.remf"
   "arith.subf"
@@ -274,7 +275,8 @@
   (complex_literal)
 ] @number
 
-(float_literal) @float
+(float_literal) @number.float
+
 (bool_literal) @boolean
 
 [
@@ -324,12 +326,23 @@
   "->"
 ] @operator
 
-(func_dialect name: (symbol_ref_id) @function)
-(llvm_dialect name: (symbol_ref_id) @function)
+(builtin_dialect
+  name: (symbol_ref_id) @function)
 
-(func_arg_list (value_use) @parameter)
-(block_arg_list (value_use) @parameter)
+(func_dialect
+  name: (symbol_ref_id) @function)
 
-(caret_id) @tag
+(llvm_dialect
+  name: (symbol_ref_id) @function)
+
+(func_arg_list
+  (value_use) @variable.parameter)
+
+(block_arg_list
+  (value_use) @variable.parameter)
+
+(caret_id) @string.special
+
 (value_use) @variable
-(comment) @comment
+
+(comment) @comment @spell
